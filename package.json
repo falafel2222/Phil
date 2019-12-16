@@ -1,0 +1,12 @@
+{
+  "name": "phil-electron-app",
+  "version": "1.0.0",
+  "description": "An Electron crossword creation application",
+  "main": "main.js",
+  "scripts": {
+    "start": "electron ."
+  },
+  "devDependencies": {
+    "electron": "^7.1.4"
+  }
+}
