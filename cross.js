@@ -308,8 +308,8 @@ function keyboardHandler(e) {
 
     previousCell.classList.remove("active");
 
-    // if control is held, check for undo/redo
-    if (e.ctrlKey) {
+    // Check key sequences where control (or command for macs) is held
+    if (e.ctrlKey || e.metaKey) {
 
       if (e.which == keyboard.s) {
         saveCrossword()
