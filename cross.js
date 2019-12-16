@@ -120,97 +120,8 @@ class Grid {
     grid.addEventListener('keydown', keyboardHandler);
   }
 
-  update() {
-    for (let i = 0; i < xw.rows; i++) {
-      for (let j = 0; j < xw.cols; j++) {
-        const activeCell = grid.querySelector('[data-row="' + i + '"]').querySelector('[data-col="' + j + '"]');
-        let fill = xw.fill[i][j];
-        if (fill == BLANK && forced != null) {
-          fill = forced[i][j];
-          activeCell.classList.add("pencil");
-        } else {
-          activeCell.classList.remove("pencil");
-        }
-        activeCell.lastChild.innerHTML = fill;
-        if (fill == BLACK) {
-          activeCell.classList.add("black");
-        } else {
-          activeCell.classList.remove("black");
-        }
-      }
-    }
-  }
 }
 
-class Button {
-  constructor(id) {
-    this.id = id;
-    this.dom = document.getElementById(id);
-    this.tooltip = this.dom.getAttribute("data-tooltip");
-    // this.type = type; // "normal", "toggle", "menu", "submenu"
-    this.state = this.dom.className; // "normal", "on", "open", "disabled"
-  }
-
-  setState(state) {
-    this.state = state;
-    this.dom.className = (this.state == "normal") ? "" : this.state;
-  }
-
-  addEvent(e, func) {
-    this.dom.addEventListener(e, func);
-    if (this.state == "disabled") {
-      this.setState("normal");
-    }
-  }
-
-  press() {
-    // switch (this.type) {
-    //   case "toggle":
-    //   case "submenu":
-    //     this.setState((this.state == "on") ? "normal" : "on");
-    //     break;
-    //   case "menu":
-    //     this.setState((this.state == "open") ? "normal" : "open");
-    //     break;
-    //   default:
-    //     break;
-  }
-}
-
-class Menu { // in dev
-  constructor(id, buttons) {
-    this.id = id;
-    this.buttons = buttons;
-
-    let div = document.createElement("DIV");
-    div.setAttribute("id", this.id);
-    for (var button in buttons) {
-      div.appendChild(button);
-    }
-    document.getElementById("toolbar").appendChild(div);
-  }
-}
-
-class Toolbar {
-  constructor(id) {
-    this.id = id;
-    this.buttons = { // rewrite this programmatically
-      "newPuzzle": new Button("new-grid"),
-      "openPuzzle": new Button("open-JSON"),
-      "exportJSON": new Button("export-JSON"),
-      "exportPUZ": new Button("export-PUZ"),
-      "exportPDF": new Button("print-puzzle"),
-      "exportNYT": new Button("print-NYT-submission"),
-      "export": new Button("export"),
-      "quickLayout": new Button("quick-layout"),
-      "freezeLayout": new Button("toggle-freeze-layout"),
-      "clearFill": new Button("clear-fill"),
-      "toggleSymmetry": new Button("toggle-symmetry"),
-      "openWordlist": new Button("open-wordlist"),
-      "autoFill": new Button("auto-fill")
-    }
-  }
-}
 
 class Notification {
   constructor(message, lifetime = undefined) {
@@ -247,7 +158,6 @@ class Interface {
   constructor(rows, cols) {
     this.grid = new Grid(rows, cols);
     this.sidebar;
-    this.toolbar = new Toolbar("toolbar");
 
     this.isSymmetrical = true;
     this.useWarning = true;
