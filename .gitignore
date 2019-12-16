@@ -4,6 +4,11 @@
 *.xcplayground
 *.xcworkspacedata
 *.xcuserstate
+
+# Npm generated files
+package-lock.json
+node_modules
+
 Crossword.playground/Resources/example.xml
 Crossword.playground/Sources/example.xml
 Crossword.playground/timeline.xctimeline
