@@ -120,7 +120,7 @@ function updateMatchesUI() {
     let li = document.createElement("LI");
     li.innerHTML = acrossMatches[i].toLowerCase();
     li.className = "";
-    // li.addEventListener('click', printScore);
+    li.addEventListener('click', fillGridWithEphemeralMatch);
     li.addEventListener('dblclick', fillGridWithMatch);
     acrossMatchList.appendChild(li);
   }
@@ -128,9 +128,31 @@ function updateMatchesUI() {
     let li = document.createElement("LI");
     li.innerHTML = downMatches[i].toLowerCase();
     li.className = "";
+    li.addEventListener('click', fillGridWithEphemeralMatch);
     li.addEventListener('dblclick', fillGridWithMatch);
     downMatchList.appendChild(li);
   }
+}
+
+/* Pencil in a word suggestion until the UI next updates.*/
+function fillGridWithEphemeralMatch(e) {
+  const li = e.currentTarget;
+  const fill = li.innerHTML.toUpperCase();
+  const dir = (li.parentNode.id == "across-matches") ? ACROSS : DOWN;
+
+  suggested = xw.fill.slice()
+  if (dir == ACROSS) {
+    suggested[current.row] = suggested[current.row].slice(0, current.acrossStartIndex) + fill + suggested[current.row].slice(current.acrossEndIndex);
+
+  } else {
+    for (let j = current.downStartIndex; j < current.downEndIndex; j++) {
+      suggested[j] = suggested[j].slice(0, current.col) + fill[j - current.downStartIndex] + suggested[j].slice(current.col + 1);
+    }
+  }
+  console.log("Suggested '" + li.innerHTML + "' going " + dir);
+  updateGridUI();
+  suggested = null
+
 }
 
 function fillGridWithMatch(e) {

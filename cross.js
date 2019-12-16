@@ -46,6 +46,7 @@ let grid = undefined;
 let squares = undefined;
 let isMutated = false;
 let forced = null;
+let suggested = null;
 // createNewPuzzle();
 let solveWorker = null;
 let solveWorkerState = null;
@@ -595,7 +596,10 @@ function updateGridUI() {
       let fill = xw.fill[i][j];
 
       // pencil in force-written letters
-      if (fill == BLANK && forced != null) {
+      if (fill == BLANK && suggested != null) {
+          fill = suggested[i][j];
+          activeCell.classList.add("pencil");
+      } else if (fill == BLANK && forced != null) {
         fill = forced[i][j];
         activeCell.classList.add("pencil");
       } else {
