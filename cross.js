@@ -564,7 +564,7 @@ function keyboardHandler(e) {
 
 function updateUI() {
   if (isMutated) {
-    autoFill(true);  // quick fill
+  // TODO: Add back fast forced autofill.
   }
 
   // change direction on single-whites
