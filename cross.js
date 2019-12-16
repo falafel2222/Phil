@@ -13,6 +13,12 @@
 // limitations under the License.
 // ------------------------------------------------------------------------
 
+const Store = require('./store.js');
+
+const store = new Store({
+  configName: 'saved_crosswords',
+});
+
 const keyboard = {
   "a": 65, "b": 66, "c": 67, "d": 68, "e": 69, "f": 70, "g": 71, "h": 72,
   "i": 73, "j": 74, "k": 75, "l": 76, "m": 77, "n": 78, "o": 79, "p": 80,
@@ -393,6 +399,10 @@ function keyboardHandler(e) {
 
     // if control is held, check for undo/redo
     if (e.ctrlKey) {
+
+      if (e.which == keyboard.s) {
+        saveCrossword()
+      }
 
       // call from history
       if (e.which == keyboard.z || e.which == keyboard.y) {
@@ -1122,6 +1132,12 @@ function showMenu(e) {
   if (menu) {
     menu.classList.remove("hidden");
   }
+}
+
+function saveCrossword() {
+  console.log('Saving current crossword')
+  store.set(xw.title, xw)
+  updateLoadMenu()
 }
 
 function hideMenu(e) {
