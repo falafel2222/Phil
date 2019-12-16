@@ -351,6 +351,28 @@ kbd {
   margin: 2px 0;
 }
 
+#toolbar ul.filenames {
+  margin: 0;
+  height: 70%;
+  list-style-type: none;
+  padding: 0;
+  color: var(--med-grey);
+  font-weight: 400;
+  overflow: hidden;
+  overflow-y: scroll;
+  max-height: 200;
+}
+
+#toolbar ul.filenames li {
+  margin: 2px 0;
+}
+
+#toolbar ul.filenames li:hover {
+  background: var(--lt-grey); /* For browsers that do not support gradients */
+  color: var(--black);
+  font-weight: 500;
+}
+
 #toolbar button:focus {
   outline: none;
 }

@@ -285,6 +285,7 @@ new Notification(document.getElementById("shortcuts").innerHTML, 300);
 let xw = new Crossword(); // model
 let current = new Interface(xw.rows, xw.cols); // view-controller
 current.update();
+updateLoadMenu()
 
 //____________________
 // F U N C T I O N S
@@ -1131,6 +1132,38 @@ function showMenu(e) {
   let menu = document.getElementById(id + "-menu");
   if (menu) {
     menu.classList.remove("hidden");
+  }
+}
+
+/* Update the load crossoword menu with the proper stored crosswords */
+function updateLoadMenu() {
+  let div = document.getElementById('load-menu')
+  div.innerHTML = '<h4> Load Puzzle (alt-click to delete): </h4>';
+  const filenames = store.keys()
+  let list = document.createElement("UL");
+  list.classList.add('filenames')
+
+  for(var i = 0; i < filenames.length; i++) {
+      let li = document.createElement("LI");
+      li.innerHTML = filenames[i];
+      li.addEventListener('click', loadMenuEvent);
+      list.appendChild(li);
+  }
+  div.appendChild(list)
+}
+
+/* Event triggered on clicking a crossword in the load menu */
+function loadMenuEvent(e) {
+  title = e.currentTarget.innerHTML;
+  if (e.altKey) {
+    console.log('Removing crossword ' + title)
+    store.delete(title);
+    updateLoadMenu();
+  }
+  else {
+    console.log('Loading crossword ' + title)
+    xw = store.get(title);
+    updateUI()
   }
 }
 

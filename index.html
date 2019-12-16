@@ -32,8 +32,8 @@
     <button id="new-grid" type="button" data-tooltip="New puzzle" onclick="createNewPuzzle()">
       <i class="fa fa-plus fa-fw" aria-hidden="true"></i>
     </button>
-    <button id="open-JSON" type="button" data-tooltip="Open puzzle..." onmouseenter="showMenu(event)" onclick="openPuzzle()">
-      <i class="fa fa-folder-open-o fa-fw" aria-hidden="true"></i>
+    <button id="open-JSON" type="button" data-tooltip="Import puzzle..." onmouseenter="showMenu(event)" onclick="openPuzzle()">
+      <i class="fa fa-upload fa-fw" aria-hidden="true"></i>
     </button>
     <input id="open-puzzle-input" class="hidden" type="file" accept=".json,.txt,.xw,.puz" />
     <div id="export-menu" class="menu hidden" onmouseleave="hideMenu(event)">
@@ -55,6 +55,10 @@
         <i class="fa fa-newspaper-o fa-fw" aria-hidden="true"></i>
       </button>
     </div>
+    <div id="load-menu" class="menu hidden" onmouseleave="hideMenu(event)"></div>
+    <button id="load" type="button" data-tooltip="Load Puzzle" onmouseenter="showMenu(event)">
+      <i class="fa fa-folder-open-o fa-fw" aria-hidden="true"></i>
+    </button>
     <button id="export" type="button" data-tooltip="Export puzzle" onmouseenter="showMenu(event)" onclick="doDefault(event)">
       <i class="fa fa-download fa-fw" aria-hidden="true"></i>
     </button>
