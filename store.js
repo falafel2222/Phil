@@ -13,11 +13,15 @@ class Store {
   }
   
   get(key) {
-    return this.data[key];
+    // FIXME: Avoid extra serialization as a manner of deepcopying
+    return JSON.parse(JSON.stringify(this.data[key]));
   }
   
   set(key, val) {
-    this.data[key] = val;
+    // FIXME: Avoid multiple serialization - the extra double
+    // stringify exists to perform a deep copy without extra
+    // imports.
+    this.data[key] = JSON.parse(JSON.stringify(val));
     fs.writeFileSync(this.path, JSON.stringify(this.data));
   }
 
